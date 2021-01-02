@@ -1,0 +1,48 @@
+<div class="central">
+
+  <mat-form-field class="example-form-field">
+    <mat-label>Pesquisar por #ID</mat-label>
+    <input matInput type="text" (keyup)='filtrar($any($event.target).value)'>
+  </mat-form-field>
+
+  <!-- <input (keyup)="filtrar($any($event.target).value)"> -->
+
+  <!-- Filter Table -->
+  <!-- <h1>{{pedidos.id}}</h1> -->
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#ID</th>
+        <th scope="col">status</th>
+        <th scope="col">total_order</th>
+        <th scope="col">update_datetime</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of itemsFilter">
+        <th class="m-click" (click)='buscarPedido(item.id)' scope="row" data-toggle="tooltip" data-placement="right" title="Tooltip on top">{{item.id}}</th>
+        <td>{{item.status}}</td>
+        <td>{{item.total_order}}</td>
+        <td>{{item.update_datetime}}</td>
+      </tr>
+  </table>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#ID</th>
+        <th scope="col">status</th>
+        <th scope="col">total_order</th>
+        <th scope="col">update_datetime</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items">
+        <th class="m-click" (click)='buscarPedido(item.id)' scope="row">{{item.id}}</th>
+        <td>{{item.status}}</td>
+        <td>{{item.total_order}}</td>
+        <td>{{item.update_datetime}}</td>
+      </tr>
+  </table>
+
+</div>

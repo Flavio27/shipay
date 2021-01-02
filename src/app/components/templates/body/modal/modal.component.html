@@ -1,0 +1,47 @@
+<div>
+  <!-- <div class="close">
+    <button class="btn btn-secondary btn-sm mh-10" mat-dialog-close>x</button>
+  </div> -->
+  <h1 mat-dialog-title>
+    <strong>Pedido:</strong> {{data.produto.id}}
+  </h1>
+  <hr>
+  <div mat-dialog-content>
+    <div class="p-3 mb-2 bg-light text-dark text-center">
+      <img src="{{data.produto.product_image}}" alt="{{data.produto.product_name}}">
+    </div>
+    <table class="table table-hover">
+      <tbody>
+        <tr>
+          <th scope="row">ID do produto</th>
+          <td>{{data.produto.product_id}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Nome do produto</th>
+          <td>{{data.produto.product_name}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Descrição do produto</th>
+          <td>{{data.produto.product_description}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Status do pedido</th>
+          <td>{{data.produto.status}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Data do pedido</th>
+          <td>{{data.produto.update_datetime}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Tipo de pagamento</th>
+          <td>{{data.produto.wallet_payment_id}}</td>
+        </tr>
+        <tr class="bg-secondary text-white">
+          <th scope="row">Total</th>
+          <td>{{data.produto.total_order}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
