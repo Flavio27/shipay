@@ -17,10 +17,15 @@ import { MatListModule } from '@angular/material/list';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
+import { JwPaginationModule } from 'jw-angular-pagination';
 import { ModalComponent } from './components/templates/body/modal/modal.component';
+import { NgxMaskModule, IConfig } from 'ngx-mask'
 
 
 
+const maskConfig: Partial<IConfig> = {
+  validation: false,
+};
 
 
 @NgModule({
@@ -43,6 +48,10 @@ import { ModalComponent } from './components/templates/body/modal/modal.componen
     MatInputModule,
     MatTableModule,
     MatDialogModule,
+    JwPaginationModule,
+    NgxMaskModule.forRoot(maskConfig),
+  
+
   ],
   providers: [HttpClientModule, ItemsService],
   bootstrap: [AppComponent]

@@ -10,3 +10,20 @@
 .m-click{
 cursor: pointer;
 }
+
+.size{
+  max-width: 500px;
+  position: center;
+}
+
+.tabela-Filtrada{
+margin-bottom: 2%;
+}
+
+.pagination-Bar{
+  overflow-x: auto;
+}
+
+.pedidos-Card{
+  margin-bottom: 3%;
+}

@@ -15,16 +15,15 @@ import { ModalComponent } from './modal/modal.component'
   styleUrls: ['./body.component.css']
 })
 
-
-
 export class BodyComponent implements OnInit {
-
-
   items: Array<any> = new Array();
   itemsFilter: Array<any> = new Array();
   pedidos: Array<any> = new Array();
   pedido: String = new String();
   result$: Observable<any> = new Observable();
+  pageOfItems: Array<any> = new Array;
+  buscando: String = new String();
+  tipo: String = new String();
 
   constructor(
     private ItemsService: ItemsService,
@@ -35,50 +34,44 @@ export class BodyComponent implements OnInit {
 
   ngOnInit() {
     this.listItems();
-
   }
 
   listItems() {
     this.ItemsService.listItems().subscribe(items => {
       this.items = items.orders;
-      console.log(items)
-
-
     }, err => {
       console.log('Erro ao listar os itens')
     })
-
   }
 
   buscarPedido(idtem: string) {
-    console.log(`${environmentEnd.API}/${idtem}`)
     this.result$ = this.http.get(`${environmentEnd.API}/${idtem}`)
     this.result$.subscribe(items => {
       this.pedidos = items;
-      console.log(items)
-      console.log(items.product_name)
       this.pedido = `ID: ${items.id} Nome: ${items.product_name}`
-
       const dialogRef = this.dialog.open(ModalComponent, { data: { produto: items } });
-
       dialogRef.afterClosed().subscribe(result => {
         console.log(`Dialog result: ${result}`);
       });
-
     }, err => {
       console.log('Erro ao listar os itens')
     })
-
-
   }
 
-  filtrar(value: string) {
+  onChangePage(pageOfItems: Array<any>) {
+    this.pageOfItems = pageOfItems;
+  }
+
+  filtrar(value: string, name: string) {
+    this.tipo = name;
+    this.buscando = value;
     if (!value) {
-      this.itemsFilter = this.items;
+      this.itemsFilter = [];
     } else {
-      this.itemsFilter = this.items.filter(items =>
-        items.id.trim().toLowerCase().includes(value.trim().toLowerCase())
+      this.itemsFilter = this.items.filter(item =>
+        item[name].toString().trim().toLowerCase().includes(value.trim().toLowerCase().replace('/', '-'))
       );
+
     }
   }
 

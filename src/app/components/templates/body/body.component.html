@@ -1,48 +1,55 @@
 <div class="central">
-
-  <mat-form-field class="example-form-field">
-    <mat-label>Pesquisar por #ID</mat-label>
-    <input matInput type="text" (keyup)='filtrar($any($event.target).value)'>
-  </mat-form-field>
-
-  <!-- <input (keyup)="filtrar($any($event.target).value)"> -->
-
-  <!-- Filter Table -->
-  <!-- <h1>{{pedidos.id}}</h1> -->
-
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col">#ID</th>
-        <th scope="col">status</th>
-        <th scope="col">total_order</th>
-        <th scope="col">update_datetime</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of itemsFilter">
-        <th class="m-click" (click)='buscarPedido(item.id)' scope="row" data-toggle="tooltip" data-placement="right" title="Tooltip on top">{{item.id}}</th>
-        <td>{{item.status}}</td>
-        <td>{{item.total_order}}</td>
-        <td>{{item.update_datetime}}</td>
-      </tr>
-  </table>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col">#ID</th>
-        <th scope="col">status</th>
-        <th scope="col">total_order</th>
-        <th scope="col">update_datetime</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of items">
-        <th class="m-click" (click)='buscarPedido(item.id)' scope="row">{{item.id}}</th>
-        <td>{{item.status}}</td>
-        <td>{{item.total_order}}</td>
-        <td>{{item.update_datetime}}</td>
-      </tr>
-  </table>
-
+  <div class="pedidos-Card">
+    <h3 class="card-header">Painel de Pedidos</h3>
+    <div class="">
+      <mat-form-field class="example-form-field">
+        <mat-label>Pesquisar por Pedido</mat-label>
+        <input matInput type="text" name="id" (keyup)='filtrar($any($event.target).value, $any($event.target).name )'>
+      </mat-form-field>
+      <mat-form-field class="example-form-field">
+        <mat-label>Pesquisar por Status</mat-label>
+        <input matInput type="text" name="status" (keyup)='filtrar($any($event.target).value, $any($event.target).name )'>
+      </mat-form-field>
+      <mat-form-field class="example-form-field">
+        <mat-label>Pesquisar por Valor</mat-label>
+        <input matInput type="text" name="total_order"
+          (keyup)='filtrar($any($event.target).value, $any($event.target).name )'>
+      </mat-form-field>
+      <mat-form-field class="example-form-field">
+        <mat-label>Pesquisar por Data de atualização</mat-label>
+        <input matInput type="text" mask="d0/M0/0000 00:00:00" name="update_datetime"
+          (keyup)='filtrar($any($event.target).value, $any($event.target).name )'>
+      </mat-form-field>
+      <mat-form-field class="example-form-field">
+        <mat-label>Pesquisar por Carteira de Pagamento</mat-label>
+        <input matInput type="text" name="wallet_payment_name"
+          (keyup)='filtrar($any($event.target).value, $any($event.target).name )'>
+      </mat-form-field>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Pedido</th>
+            <th scope="col">Status</th>
+            <th scope="col">Valor</th>
+            <th scope="col">Data de atualização</th>
+            <th scope="col">Carteira de Pagamento</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of pageOfItems">
+            <th class="m-click" (click)='buscarPedido(item.id)' scope="row">{{item.id}}</th>
+            <td>{{item.status}}</td>
+            <td>{{item.total_order}}</td>
+            <td>{{item.update_datetime}}</td>
+            <td>{{item.wallet_payment_name}}</td>
+          </tr>
+      </table>
+    </div>
+    <div *ngIf="itemsFilter.length === 0" class="pagination-Bar">
+      <jw-pagination [items]="items" (changePage)="onChangePage($event)" class="d-flex"></jw-pagination>
+    </div>
+    <div *ngIf="itemsFilter.length > 0" class="pagination-Bar">
+      <jw-pagination [items]="itemsFilter" (changePage)="onChangePage($event)" class="d-flex"></jw-pagination>
+    </div>
+  </div>
 </div>
