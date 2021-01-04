@@ -65,6 +65,7 @@ export class BodyComponent implements OnInit {
   filtrar(value: string, name: string) {
     this.tipo = name;
     this.buscando = value;
+    console.log(name)
     if (!value) {
       this.itemsFilter = [];
     } else {

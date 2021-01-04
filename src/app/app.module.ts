@@ -38,7 +38,7 @@ const maskConfig: Partial<IConfig> = {
     ModalComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
