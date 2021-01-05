@@ -1,6 +1,6 @@
-## Solução do code challenge da Shipay feito por: Flavio Rocha
-# Disponível online em: https://flavio27.github.io/shipay/
-# Código Fonte Disponível em: https://github.com/Flavio27/shipay
+# Solução do code challenge da Shipay feito por: Flavio Rocha
+## Disponível online em: https://flavio27.github.io/shipay/
+## Código Fonte Disponível em: https://github.com/Flavio27/shipay
 
 ## Como rodar
 * No terminal execute: `npm install`
