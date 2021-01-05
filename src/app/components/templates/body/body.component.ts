@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { environmentEnd } from '../../../../environments/environment.prod';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from './modal/modal.component'
+import { mapToMapExpression } from '@angular/compiler/src/render3/util';
 
 @Component({
   selector: 'app-body',
@@ -24,6 +25,7 @@ export class BodyComponent implements OnInit {
   pageOfItems: Array<any> = new Array;
   buscando: String = new String();
   tipo: String = new String();
+  filtros: Map<String, String> = new Map();
 
   constructor(
     private ItemsService: ItemsService,
@@ -63,18 +65,19 @@ export class BodyComponent implements OnInit {
   }
 
   filtrar(value: string, name: string) {
-    this.tipo = name;
-    this.buscando = value;
-    console.log(name)
-    if (!value) {
-      this.itemsFilter = [];
-    } else {
-      this.itemsFilter = this.items.filter(item =>
-        item[name].toString().trim().toLowerCase().includes(value.trim().toLowerCase().replace('/', '-'))
-      );
-
-    }
+    this.filtros.set(name, value);
+    this.itemsFilter = [];
+    this.filtros.forEach((v, k) => {
+      if (v)
+        this.itemsFilter = this.itemsFilter.length > 0 ? this.filtrarArray(this.itemsFilter, k, v) : this.filtrarArray(this.items, k, v)
+    });
   }
 
+  private filtrarArray(items: Array<any>, key: String, value: String) {
+    return items.filter(item => {
+      if (item[`${key}`])
+        return item[`${key}`].toString().trim().toLowerCase().includes(value.trim().toLowerCase())
+    })
+  }
 
 }
